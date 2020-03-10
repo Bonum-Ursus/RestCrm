@@ -40,4 +40,13 @@ public class CrmRestController {
         return customer;
     }
 
+    @DeleteMapping("/customers/{customerID}")
+    public Customer deleteCustomer(@PathVariable int customerID){
+        Customer customer = customerService.getCustomer(customerID);
+        if(customer == null)
+            throw new CustomerNotFoundException("Customer with id = " + customerID + " NOT found.");
+        customerService.deleteCustomer(customerID);
+        return customer;
+    }
+
 }
